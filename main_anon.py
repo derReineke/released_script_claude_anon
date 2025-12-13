@@ -40,7 +40,8 @@ CSV_HEADERS = [
 # Pattern to match a transaction line:
 # TRANS_TYPE  GROSS  COMMISSION  NET  GROSS  COMMISSION  NET
 # e.g., "NEW POLICIES 21,149.00 3,172.35 17,976.65 .00 .00 .00"
-AMOUNT_PATTERN = r"[\d,]+\.\d{2}(?:CR)?"
+# Note: (?:[\d,]+)? makes digits optional to match ".00" (zero values)
+AMOUNT_PATTERN = r"(?:[\d,]+)?\.\d{2}(?:CR)?"
 LINE_PATTERN = re.compile(
     rf"^({'|'.join(TRANSACTION_TYPES)})\s+({AMOUNT_PATTERN})",
     re.MULTILINE
