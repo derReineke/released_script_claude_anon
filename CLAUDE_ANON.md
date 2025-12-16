@@ -17,6 +17,15 @@ uv run python main_anon.py <filename.pdf>
 
 # Run extraction with CSV output
 uv run python main_anon.py <filename.pdf> -o output.csv
+
+# Run tests
+uv run pytest test_main.py
+
+# Run tests with verbose output
+uv run pytest test_main.py -v
+
+# Run tests with coverage report
+uv run pytest test_main.py --cov=main_anon
 ```
 
 ## Architecture
@@ -40,3 +49,16 @@ Single-file script (`main_anon.py`) using pdfplumber's text extraction with rege
 **Transaction types extracted:** NEW POLICIES, REWRITES, ADDED PREMIUM, RETURN PREMIUM, RENEWALS, CANCELLATIONS
 
 PDF files go in `pdfs/`, CSV outputs go in `output/`.
+
+## Testing
+
+The project includes comprehensive unit tests in `test_main.py` covering:
+
+- **Amount parsing**: Handles commas, CR suffix (credits), zero values, and whitespace
+- **Amount formatting**: Ensures proper .00 formatting for zeros and 2 decimal places
+- **Page data extraction**: Tests single/multiple transactions, credits, zero values, and all transaction types
+- **CSV writing**: Verifies directory creation, content formatting, and multi-company output
+- **PDF extraction**: Tests page processing, missing pages, and company name mapping
+- **Constants validation**: Ensures PAGES and TRANSACTION_TYPES are correctly configured
+
+All tests use mocking to avoid requiring actual PDF files.

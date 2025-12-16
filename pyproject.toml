@@ -9,3 +9,8 @@ dependencies = [
     "pdfminer-six>=20250506",
     "pdfplumber>=0.11.7",
 ]
+
+[dependency-groups]
+dev = [
+    "pytest>=8.3.4",
+]
