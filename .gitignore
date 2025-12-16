@@ -11,6 +11,7 @@ pdfs/
 output/
 main.py
 CLAUDE.md
+.claude/
 
 # Virtual environments
 .venv
